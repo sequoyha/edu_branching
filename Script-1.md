@@ -4,6 +4,7 @@ Learning objectives:
 
 * Objective 1: Identify the "Schema Disconnect" and why it emerges at scale
 * Objective 2: Leave this out for something else
+* Objective 3: Added per comment in PR
 
 **Word Count: 451 as of Thu Jun 18 2026**
 
