@@ -1,6 +1,6 @@
-## 📹 Video Overview
-- **Video Title:** [Insert Title]
-- **Target Duration:** [e.g., 3–5 minutes]
+## 📹 Skill Overview
+- **Skill Title:** [Insert Title]
+- **Target Duration:** [e.g., 30–50 minutes]
 - **Target Audience:** [e.g., Enterprise Clients, New Users, Developers]
 - **Core Message / Goal:** [What is the main takeaway for the viewer?]
 
@@ -8,17 +8,19 @@
 
 ## 📝 Script Checklist
 Before marking this Pull Request as ready for review, ensure the following:
-- [ ] Script follows the standard Visual Cues / Audio layout.
+- [ ] Scripts follow the standard Visual Cues / Audio layout.
 - [ ] Estimated word count matches target length (~130–150 words per minute).
-- [ ] On-screen graphics, text overlays, and B-roll are specified in visual cues.
-- [ ] Clear Call to Action (CTA) is included at the end.
+- [ ] On-screen graphics, text overlays, and visual choice (Talking Head, Slides, etc.) are specified in visual cues.
+
 
 ---
 
 ## 👥 Review Sign-Offs Needed
 - [ ] **Subject Matter Expert:** Technical accuracy check
-- [ ] **Video Producer / Editor:** Visual feasibility and pacing check
+- [ ] **Tech Reviewer(s):**
+- [ ] **Qualit-E:**
 - [ ] **Marketing / Brand Lead:** Tone and messaging check
+- [ ] **Video Producer / Editor:** Visual feasibility and pacing check
 
 ---
 
