@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Recreate Branch from JIRA",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "./scripts/reset-jira-branch.sh",
+                "${input:targetBranch}"
+            ],
+            "windows": {
+                "command": "powershell.exe",
+                "args": [
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    ".\\scripts\\reset-jira-branch.ps1",
+                    "-TargetBranch",
+                    "${input:targetBranch}"
+                ]
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "targetBranch",
+            "type": "pickString",
+            "description": "Select the target branch to switch to:",
+            "options": [
+                "trunk",
+                "tech",
+                "quality",
+                "final"
+            ],
+            "default": "main"
+        }
+    ]
+}
