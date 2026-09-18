@@ -1,0 +1,26 @@
+ *  Executing task: bash ./scripts/reset-jira-branch.sh quality 
+
+Extracted JIRA Key: UC-21
+branch 'quality' set up to track 'origin/quality'.
+Switched to a new branch 'quality'
+Deleted branch feature/UC-21 (was 95947a9).
+Already up to date.
+Switched to a new branch 'feature/UC-21'
+Successfully created new branch 'feature/UC-21' from 'quality'.
+ *  Terminal will be reused by tasks, press any key to close it. 
+
+ *  Executing task: bash ./scripts/reset-jira-branch.sh quality 
+
+Extracted JIRA Key: UC-321
+Switched to branch 'quality'
+Your branch is up to date with 'origin/quality'.
+Deleted branch UC-321 (was 9f7e71c).
+remote: Enumerating objects: 1, done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 1 (from 1)
+Unpacking objects: 100% (1/1), 889 bytes | 222.00 KiB/s, done.
+From github.com:sequoyha/edu_branching
+   95947a9..b19c3cb  tech       -> origin/tech
+Already up to date.
+Switched to a new branch 'UC-321'
+Successfully created new branch 'UC-321' from 'quality'.
+ *  Terminal will be reused by tasks, press any key to close it. 
