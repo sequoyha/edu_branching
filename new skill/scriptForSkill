@@ -1,6 +1,7 @@
  *  Executing task: bash ./scripts/reset-jira-branch.sh quality 
 
 Extracted JIRA Key: UC-21
+* THIS IS NOT TRU, YOU JUST COPY/PASTED
 branch 'quality' set up to track 'origin/quality'.
 Switched to a new branch 'quality'
 Deleted branch feature/UC-21 (was 95947a9).
