@@ -1,6 +1,6 @@
 # MongoDB Advantages Over SQL and NoSQL Databases
 
-**Estimated runtime:** 4–5 minutes
+**Estimated runtime:** 6-7 minutes
 
 ## Video Script
 
