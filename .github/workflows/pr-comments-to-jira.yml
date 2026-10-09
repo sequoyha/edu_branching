@@ -1,0 +1,43 @@
+name: Sync All PR Comments to Jira
+
+on:
+  # Triggers for overall PR conversation comments
+  issue_comment:
+    types: [created]
+  # Triggers for inline comments left on file diffs
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  sync-comment:
+    # Ensure it only runs for PR conversation comments, or any inline file review comment
+    if: github.event.issue.pull_request != null || github.event.comment.pull_request_url != null
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Jira Issue Key
+        id: find_key
+        uses: atlassian/gajira-find-issue-key@v3
+        with:
+          # Extract the PR title differently based on which event triggered the run
+          string: \${{ github.event.issue.title || github.event.pull_request.title }}
+
+      - name: Post Comment to Jira
+        if: steps.find_key.outputs.issue != ''
+        run: |
+          AUTH_TOKEN=\$(echo -n "\({{ secrets.JIRA_USER_EMAIL }}:\){{ secrets.JIRA_API_TOKEN }}" | base64)
+          
+          # Differentiate formatting to show if it was an inline file comment
+          if [ "\${{ github.event_name }}" = "pull_request_review_comment" ]; then
+            COMMENT_BODY="[GitHub PR File Comment by @\${{ github.event.comment.user.login }} on \`${{ github.event.comment.path }}\`]: \${{ github.event.comment.body }}"
+          else
+            COMMENT_BODY="[GitHub PR Conversation Comment by @\({{ github.event.comment.user.login }}]:\){{ github.event.comment.body }}"
+          fi
+          
+          JSON_PAYLOAD=\$(jq -n --arg body "\(COMMENT_BODY" '{body: {type: "doc", version: 1, content: [{type: "paragraph", content: [{type: "text", text: \)body}]}]}}')
+          
+          curl --request POST \
+            --url "\({{ secrets.JIRA_BASE_URL }}/rest/api/3/issue/\){{ steps.find_key.outputs.issue }}/comment" \
+            --header "Authorization: Basic \$AUTH_TOKEN" \
+            --header "Accept: application/json" \
+            --header "Content-Type: application/json" \
+            --data "\$JSON_PAYLOAD"
