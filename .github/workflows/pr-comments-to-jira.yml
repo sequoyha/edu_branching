@@ -44,7 +44,7 @@ jobs:
           
           curl --request POST \
             --url "${{ secrets.JIRA_BASE_URL }}/rest/api/3/issue/${{ steps.find_key.outputs.issue }}/comment" \
-            --header "Authorization: Basic \$AUTH_TOKEN" \
+            --header "Authorization: Basic $AUTH_TOKEN" \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
-            --data "\$JSON_PAYLOAD"
+            --data "$JSON_PAYLOAD"
