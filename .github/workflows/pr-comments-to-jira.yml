@@ -17,34 +17,34 @@ jobs:
       - name: Login to Jira
         uses: atlassian/gajira-login@v3
         env:
-          JIRA_BASE_URL: \${{ secrets.JIRA_BASE_URL }}
-          JIRA_USER_EMAIL: \${{ secrets.JIRA_USER_EMAIL }}
-          JIRA_API_TOKEN: \${{ secrets.JIRA_API_TOKEN }}
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
       - name: Find Jira Issue Key
         id: find_key
         uses: atlassian/gajira-find-issue-key@v3
         with:
           # Extract the PR title differently based on which event triggered the run
-          string: \${{ github.event.issue.title || github.event.pull_request.title }}
+          string: ${{ github.event.issue.title || github.event.pull_request.title }}
 
       - name: Post Comment to Jira
         if: steps.find_key.outputs.issue != ''
         run: |
-          AUTH_TOKEN=\$(echo -n "${{ secrets.JIRA_USER_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" | base64)
+          AUTH_TOKEN=$(echo -n "${{ secrets.JIRA_USER_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" | base64 -w 0)
           
           # Differentiate formatting to show if it was an inline file comment
-          if [ "\${{ github.event_name }}" = "pull_request_review_comment" ]; then
+          if [ "${{ github.event_name }}" = "pull_request_review_comment" ]; then
             COMMENT_BODY="[GitHub PR File Comment by @\${{ github.event.comment.user.login }} on \`${{ github.event.comment.path }}\`]: \${{ github.event.comment.body }}"
           else
             COMMENT_BODY="[GitHub PR Conversation Comment by @${{ github.event.comment.user.login }}]:${{ github.event.comment.body }}"
           fi
           
-          JSON_PAYLOAD=\$(jq -n --arg body "$COMMENT_BODY" '{body: {type: "doc", version: 1, content: [{type: "paragraph", content: [{type: "text", text: $body}]}]}}')
+          JSON_PAYLOAD=$(jq -n -c --arg body "$COMMENT_BODY" '{body: {type: "doc", version: 1, content: [{type: "paragraph", content: [{type: "text", text: $body}]}]}}')
           
           curl --request POST \
             --url "${{ secrets.JIRA_BASE_URL }}/rest/api/3/issue/${{ steps.find_key.outputs.issue }}/comment" \
-            --header "Authorization: Basic \$AUTH_TOKEN" \
+            --header "Authorization: Basic $AUTH_TOKEN" \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
-            --data "\$JSON_PAYLOAD"
+            --data "$JSON_PAYLOAD"
