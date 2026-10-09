@@ -3,3 +3,5 @@ Maybe we keep this file to note diffs between branching commits. Maybe we don't 
 Added first audit log item
 
 TECG Review - Minor change to script
+
+updating commit to trunk via OR to glose out Jira
