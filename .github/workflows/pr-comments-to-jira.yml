@@ -40,7 +40,7 @@ jobs:
             COMMENT_BODY="[GitHub PR Conversation Comment by @${{ github.event.comment.user.login }}]:${{ github.event.comment.body }}"
           fi
           
-          JSON_PAYLOAD=\$(jq -n --arg body "$COMMENT_BODY" '{body: {type: "doc", version: 1, content: [{type: "paragraph", content: [{type: "text", text: $body}]}]}}')
+          JSON_PAYLOAD=$(jq -n --arg body "$COMMENT_BODY" '{body: {type: "doc", version: 1, content: [{type: "paragraph", content: [{type: "text", text: $body}]}]}}')
           
           curl --request POST \
             --url "${{ secrets.JIRA_BASE_URL }}/rest/api/3/issue/${{ steps.find_key.outputs.issue }}/comment" \
