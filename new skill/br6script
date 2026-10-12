@@ -1,0 +1,11 @@
+ *  Executing task: bash ./scripts/reset-jira-branch.sh quality 
+
+Extracted JIRA Key: UC-21
+* THIS IS NOT TRU, YOU JUST COPY/PASTED
+branch 'quality' set up to track 'origin/quality'.
+Switched to a new branch 'quality'
+Deleted branch feature/UC-21 (was 95947a9).
+Already up to date.
+Switched to a new branch 'feature/UC-21'
+Successfully created new branch 'feature/UC-21' from 'quality'.
+ *  Terminal will be reused by tasks, press any key to close it.
